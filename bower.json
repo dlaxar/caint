@@ -1,0 +1,13 @@
+{
+  "name": "caint",
+  "version": "0.0.0",
+  "authors": [
+    "Daniel Laxar <i.dlaxar@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "eventEmitter": "~4.2.7",
+	"requirejs": "jrburke/requirejs#latest"
+  }
+}

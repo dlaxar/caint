@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <p>Below is a caint-canvas....</p>
+        <div id="canvas-container"></div>
+
+        <script src="js/vendor/requirejs/require.js"></script>
+        <script>
+	        require([
+		        'js/caint/caint',
+		        'js/caint/shapes/RoundedRect',
+		        'js/caint/shapes/Circle',
+		        'js/caint/plugins/FX',
+		        'js/caint/shapes/Image',
+		        'js/caint/shapes/LocalSystem',
+	            'js/caint/helpers/Gradient',
+	            'js/caint/shapes/Text',
+	            'js/caint/Layer'], function(Caint, Rect, Circle, FX, Image, LocalSystem, Gradient, Text, Layer) {
+				var caint = new Caint({
+					width: 1300,
+					height: 1000,
+					background: 'black'
+				});
+		        FX();
+
+		        var g = new Gradient(caint);
+		        g.from('middle top').to('middle bottom').stop(0, 'rgb(141, 205, 246)').stop('1', 'rgb(71, 134, 238)');
+
+
+		        var iphone = new Image();
+		        iphone.src = 'img/iphone.jpg';
+		        iphone.addTo(caint).at(0, 0);
+
+		        var mask = new Layer(caint);
+		        caint.addLayer(mask);
+
+		        var iphoneTop = new Image();
+		        iphoneTop.src = 'img/iphone_top.jpg';
+		        iphoneTop.addTo(mask).at(0, 0);
+
+		        var messages = new Image();
+		        messages.src = 'img/messages.jpg';
+		        messages.addTo(caint).at(37, 153);
+
+		        var newMessage = new LocalSystem();
+		        newMessage.addTo(caint).at(71, 527);
+
+		        var newMessageBox = new Rect();
+		        newMessageBox.fillStyle = g.build();
+		        newMessageBox.strokeStyle = 'none';
+		        newMessageBox.width = 175;
+		        newMessageBox.height = 23;
+		        newMessageBox.borderRadius = 0;
+		        newMessageBox.addTo(newMessage).at(0, 0);
+
+		        var text = new Text('My new number. GI Joe.');
+		        text.font = '100 13px Helvetica';
+		        text.fillStyle = 'white';
+		        text.addTo(newMessage).at(10, 16);
+
+
+		        messages.tween('y').to(110).in(.5, 's').using('easeinout').now();
+
+		        newMessage.tween('x').to(117).using('easeinout').in(.5, 's').now();
+		        newMessage.tween('y').to(480).using('easeinout').in(.5, 's').now();
+		        newMessageBox.tween('width').to(160).using('easeinout').in(.5, 's').now();
+		        newMessageBox.tween('borderRadius').to(10).using('easeinout').in(.5, 's').now();
+
+
+		        caint.paint();
+		        caint.setRepaintMode(caint.REPAINT_MODE_RAF);
+		        caint.appendTo(document.getElementById('canvas-container'));
+	        });
+        </script>
+
+    </body>
+</html>
