@@ -3,6 +3,7 @@
 define(['./shapes/drawable', '../utils/inherits'], function(Drawable, inherits) {
 
 	var Layer = function(caint) {
+		Layer.super_.apply(this);
 		this.caint = caint;
 		this.stack = [];
 	};
