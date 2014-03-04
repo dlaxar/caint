@@ -1,3 +1,5 @@
 .idea
 js/vendor
 *.psd
+build
+node_modules
