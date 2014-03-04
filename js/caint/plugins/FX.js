@@ -1,6 +1,6 @@
 'use strict';
 
-define(['./../shapes/drawable', 'js/vendor/eventEmitter/EventEmitter', 'js/utils/inherits'], function(Drawable, EventEmitter, inherits) {
+define(['./../shapes/drawable', '../../vendor/eventEmitter/EventEmitter', '../../utils/inherits'], function(Drawable, EventEmitter, inherits) {
 
 	var FPS = 60;
 
